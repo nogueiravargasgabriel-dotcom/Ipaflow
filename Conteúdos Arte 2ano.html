@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro de Arte: Missão Avaliações</title>
+    <!-- Fontes modernas e atraentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f1016;
+            --card-bg: rgba(30, 31, 40, 0.6);
+            --primary: #8a2be2;
+            --p1-color: #00ff88;
+            --tc-color: #ff3366;
+            --p2-color: #00d4ff;
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Formas orgânicas de fundo (Background Blobs) */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+        }
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--p2-color);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            z-index: 1;
+        }
+
+        /* Header e Progresso */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px;
+            padding: 15px 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--p1-color);
+        }
+
+        .progress-bar-bg {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--p1-color), var(--p2-color));
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 15px var(--p1-color);
+        }
+
+        /* Grid de Cartões (Single Page Layout) */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .card-p1::before { background: var(--p1-color); }
+        .card-p1:hover { box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2); }
+        
+        .card-tc::before { background: var(--tc-color); }
+        .card-tc:hover { box-shadow: 0 10px 30px rgba(255, 51, 102, 0.2); }
+        
+        .card-p2::before { background: var(--p2-color); }
+        .card-p2:hover { box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-p1 h2 { color: var(--p1-color); }
+        .card-tc h2 { color: var(--tc-color); }
+        .card-p2 h2 { color: var(--p2-color); }
+
+        /* Lista interativa (Checkboxes) */
+        .topic {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .topic:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .topic.completed {
+            border-color: rgba(255, 255, 255, 0.2);
+            opacity: 0.6;
+        }
+
+        .topic.completed .topic-info {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .checkbox {
+            width: 25px;
+            height: 25px;
+            border-radius: 8px;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .topic:hover .checkbox {
+            border-color: var(--text-main);
+        }
+
+        .topic.completed .checkbox {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox i {
+            color: transparent;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .topic.completed .checkbox i {
+            color: #fff;
+        }
+
+        .topic-info {
+            flex-grow: 1;
+            transition: all 0.2s;
+        }
+
+        .topic-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .topic-vol {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.1);
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .topic-icon {
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        .card-p1 .topic-icon { color: var(--p1-color); }
+        .card-tc .topic-icon { color: var(--tc-color); }
+        .card-p2 .topic-icon { color: var(--p2-color); }
+
+        /* Celebração final */
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background animado -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <canvas id="confetti"></canvas>
+
+    <div class="container">
+        
+        <div class="header">
+            <h1>Roteiro de Arte 🎨</h1>
+            <p>Sua missão para gabaritar as avaliações. Marque o que já estudou!</p>
+            
+            <!-- Barra de Progresso -->
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span>Nível de Preparo</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            
+            <!-- Missão 1: P1 & SD -->
+            <div class="card card-p1">
+                <h2><i class="fa-solid fa-gamepad"></i> P1 & SD</h2>
+                
+                <div class="topic" onclick="toggleComplete(this)">
+                    <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="topic-info">
+                        <div class="topic-title">Arte antiga: cultura e identidade...</div>
+                        <div class="topic-vol">Vol 20 (P1)</div>
+                    </div>
+                    <i class="fa-solid fa-landmark topic-icon"></i>
+                </div>
+
+                <div class="topic" onclick="toggleComplete(this)">
+                    <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="topic-info">
+                        <div class="topic-title">Expressões cênicas brasileiras...</div>
+                        <div class="topic-vol">Vol 23 (SD)</div>
+                    </div>
+                    <i class="fa-solid fa-masks-theater topic-icon"></i>
+                </div>
+            </div>
+
+            <!-- Missão 2: TC -->
+            <div class="card card-tc">
+                <h2><i class="fa-solid fa-puzzle-piece"></i> TC</h2>
+                
+                <div class="topic" onclick="toggleComplete(this)">
+                    <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="topic-info">
+                        <div class="topic-title">A evolução da mídia</div>
+                        <div class="topic-vol">Vol 19</div>
+                    </div>
+                    <i class="fa-solid fa-photo-film topic-icon"></i>
+                </div>
+            </div>
+
+            <!-- Missão 3: P2 -->
+            <div class="card card-p2">
+                <h2><i class="fa-solid fa-skull"></i> P2</h2>
+                
+                <div class="topic" onclick="toggleComplete(this)">
+                    <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="topic-info">
+                        <div class="topic-title">Arte, corpo e movimento</div>
+                        <div class="topic-vol">Vol 21</div>
+                    </div>
+                    <i class="fa-solid fa-person-running topic-icon"></i>
+                </div>
+
+                <div class="topic" onclick="toggleComplete(this)">
+                    <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="topic-info">
+                        <div class="topic-title">Arte oriental</div>
+                        <div class="topic-vol">Vol 22</div>
+                    </div>
+                    <i class="fa-solid fa-yin-yang topic-icon"></i>
+                </div>
+
+                <div class="topic" onclick="toggleComplete(this)">
+                    <div class="checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="topic-info">
+                        <div class="topic-title">O corpo a serviço da Arte</div>
+                        <div class="topic-vol">Vol 24</div>
+                    </div>
+                    <i class="fa-solid fa-child-reaching topic-icon"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script para Interatividade -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const totalTopics = document.querySelectorAll('.topic').length;
+        
+        function toggleComplete(element) {
+            // Adiciona/Remove a classe 'completed'
+            element.classList.toggle('completed');
+            
+            // Atualiza progresso
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const completedTopics = document.querySelectorAll('.topic.completed').length;
+            const percentage = Math.round((completedTopics / totalTopics) * 100);
+            
+            // Atualiza UI
+            document.getElementById('progress-percent').innerText = `${percentage}%`;
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+
+            // Muda a cor baseado no progresso
+            if(percentage === 100) {
+                document.getElementById('progress-fill').style.boxShadow = '0 0 20px #00ff88';
+                triggerConfetti();
+            } else {
+                document.getElementById('progress-fill').style.boxShadow = '0 0 15px var(--p1-color)';
+            }
+        }
+
+        // Função de efeito visual quando atingir 100%
+        function triggerConfetti() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+                }));
+                confetti(Object.assign({}, defaults, { particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+                }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
